@@ -27,8 +27,8 @@ const offlineCapabilities={name:'offline-capabilities',setup(b){
  b.onLoad({filter:/react-dom-client\.production\.js$/},async args=>({loader:'js',contents:(await fs.readFile(args.path,'utf8')).replaceAll('navigator.connection','undefined')}));
 }};
 const result=await build({entryPoints:['src/main.tsx'],bundle:true,format:'iife',target:['es2017','chrome61'],minify:true,outfile:`${out}/assets/main.js`,assetNames:'[name]-[hash]',publicPath:web?'/assets':undefined,loader:assetLoaders,define:{'process.env.NODE_ENV':'"production"','__ROOM_BGM__':JSON.stringify(hasTrack?'./audio/room-theme.mp3':null),'__ROOM_EDITOR__':JSON.stringify(!web)},jsx:'automatic',legalComments:'none',sourcemap:false,metafile:true,tsconfig:'tsconfig.json',plugins:[optimizedImages,offlineCapabilities,{name:'local-css',setup(b){b.onLoad({filter:/\.css$/},async args=>{css.push(await fs.readFile(args.path,'utf8'));return {contents:'',loader:'js'};});}}]});
-// Preserve import order, regardless of parallel module loading.
-const main=await fs.readFile('src/main.tsx','utf8');const sheets=Array.from(main.matchAll(/import '(\.\/styles\/[^']+\.css)'/g),m=>m[1]);
+// esbuild sees CSS imports in nested components too; keep their cascade order stable.
+const sheets=['styles/prototype.css','styles/entrance.css','components/FlipCard.css'];
 const source=(await Promise.all(sheets.map(s=>fs.readFile(path.join('src',s),'utf8')))).join('\n');
 const root=postcss.parse(source);
 root.walkDecls(d=>{
