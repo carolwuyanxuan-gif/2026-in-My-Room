@@ -1,0 +1,89 @@
+@font-face{font-family:EntranceHand;src:url('../assets/note-handwriting.ttf') format('truetype');font-display:swap}
+.entrance-cube-button{position:absolute;left:50%;top:67%;width:120px;height:120px;transform:translate(-50%,-50%);border:0;background:transparent;cursor:pointer;perspective:600px}
+.entrance-cube{position:absolute;left:25px;top:25px;width:70px;height:70px;transform-style:preserve-3d;transform:rotateX(-25deg) rotateY(35deg);filter:drop-shadow(0 0 22px #ffd16c);animation:cubeBreathe 3s ease-in-out infinite}
+.entrance-cube i{position:absolute;inset:0;background:#ffd88a;border:1px solid #fff1bc;box-shadow:inset 0 0 20px #fff1c8}
+.entrance-cube i:nth-child(1){transform:translateZ(35px)}.entrance-cube i:nth-child(2){transform:rotateY(90deg) translateZ(35px);background:#eab659}.entrance-cube i:nth-child(3){transform:rotateX(90deg) translateZ(35px);background:#ffedb8}
+@keyframes cubeBreathe{50%{filter:drop-shadow(0 0 38px #ffcf69);translate:0 -5px}}
+.prototype-shell.entrance-waiting .room-canvas>canvas{opacity:0;animation:none;transform:none}
+.prototype-shell.entrance-entering .room-canvas>canvas{transform:none;animation:emptyRoomAppear 6.5s both}
+@keyframes emptyRoomAppear{0%,28%{opacity:0}42%,100%{opacity:1}}
+.entrance-ready.entrance-waiting:before,.entrance-ready.entrance-entering:before{display:none}
+.entrance-entering .entrance-cube-button{animation:cubeUnfold 2.7s both;pointer-events:none}
+.entrance-entering .entrance-cube{animation:none}
+@keyframes cubeUnfold{0%{transform:translate(-50%,-50%) scale(1)}12%{transform:translate(-50%,-35%) scale(1.12,.8)}26%{transform:translate(-50%,-75%) scale(.92,1.1)}38%{transform:translate(-50%,-50%) scale(1)}70%{opacity:1}100%{transform:translate(-50%,-50%) scale(9);opacity:0}}
+.prototype-shell .room-help{z-index:190;pointer-events:none;bottom:calc(env(safe-area-inset-bottom,0px) + 16px);max-width:calc(100vw - 36px);white-space:normal;text-align:center;color:#eee9df;background:#20221cc9;border-color:#ffffff20;font-size:13px;line-height:1.5;padding:7px 14px}
+@media(pointer:coarse){.prototype-shell .room-help{bottom:calc(env(safe-area-inset-bottom,0px) + 58px)}}
+.prototype-shell.entrance-waiting,.prototype-shell.entrance-entering{background:#000}
+.entrance-loading .room-entrance,.entrance-loading .room-canvas{visibility:hidden}
+.entrance-waiting .room-canvas>canvas{transform:translateY(18vh) scale(.16);animation:roomFloat 4s ease-in-out infinite}
+.entrance-entering .room-canvas>canvas{animation:roomArrive 4.2s both}
+@keyframes roomFloat{50%{transform:translateY(17vh) scale(.16)}}
+@keyframes roomArrive{0%,38%{transform:var(--room-start,translateY(18vh) scale(.16))}100%{transform:translateY(0) scale(1)}}
+.entrance-ready.entrance-waiting:before,.entrance-ready.entrance-entering:before{content:'';position:absolute;pointer-events:none;z-index:1;left:50%;top:68%;width:clamp(115px,18vw,245px);height:clamp(65px,11vw,150px);border-radius:50%;background:radial-gradient(ellipse,transparent 45%,#ffd58e18 65%,transparent 74%);box-shadow:0 0 24px 8px #ffbf6538,inset 0 0 18px #ffd89920;transform:translate(-50%,-50%);animation:roomWarmGlow 3.2s ease-in-out infinite}
+@keyframes roomWarmGlow{0%,100%{opacity:.2;transform:translate(-50%,-50%) scale(.92)}50%{opacity:.85;transform:translate(-50%,-50%) scale(1.08)}}
+.entrance-ready.entrance-entering:before{animation:roomGlowLeave 2s forwards}
+@keyframes roomGlowLeave{0%{opacity:.5}75%{opacity:.3}100%{opacity:0}}
+.prototype-shell:not(.entrance-done) .room-canvas{pointer-events:none}
+.prototype-shell:not(.entrance-done) .room-canvas>:not(canvas),.prototype-shell:not(.entrance-done)>.compact-toolbar,.prototype-shell:not(.entrance-done)>.room-help,.prototype-shell:not(.entrance-done)>.sofa-switch{visibility:hidden}
+.room-entrance{position:absolute;inset:0;z-index:200;width:100%;height:100%;border:0;background:transparent;color:#eee9dc;cursor:pointer;text-align:center;overflow:hidden}
+.room-entrance:disabled{cursor:default}
+.entrance-copy{position:absolute;top:20%;left:5%;width:90%;font:clamp(17px,2.1vw,25px)/1.65 EntranceHand,KaiTi,serif;text-shadow:0 2px 16px #000}
+.entrance-copy p{margin:0 0 8px}.entrance-copy p:last-child{margin-top:24px}
+.entrance-hint{position:absolute;bottom:12%;left:0;width:100%;font:14px EntranceHand,KaiTi,serif;color:#b3b6ad;letter-spacing:2px}
+.entrance-entering .entrance-copy p{animation:entranceFall 1.25s cubic-bezier(.4,0,.85,.5) both;animation-delay:calc(var(--line)*90ms)}
+.entrance-entering .entrance-hint{opacity:0;transition:opacity .25s}
+.prototype-shell.entrance-waiting .room-canvas>canvas,.prototype-shell.entrance-entering .room-canvas>canvas{opacity:1;animation:none;transform:none}
+.entrance-cube-button .entrance-cube{display:none}
+.entrance-entering .entrance-cube-button{animation:none;visibility:hidden}
+@keyframes entranceFall{from{transform:translateY(0) rotate(0);opacity:1}100%{transform:translateY(65vh) rotate(5deg);opacity:0}}
+.prototype-shell.entrance-waiting .room-canvas>canvas{transform:translateY(18vh) scale(.38);opacity:1;animation:none}
+.prototype-shell.entrance-entering .room-canvas>canvas{animation:approachDarkRoom 3.6s both}
+@keyframes approachDarkRoom{0%,43%{transform:translateY(18vh) scale(.38)}100%{transform:translateY(0) scale(1)}}
+.entrance-lamp .entrance-copy{display:none}.entrance-lamp .room-entrance{pointer-events:none}
+.prototype-shell.entrance-lamp .room-canvas{pointer-events:auto}
+.prototype-shell.entrance-lamp .room-canvas>.entrance-lamp-ring{visibility:visible}
+.entrance-lamp-ring{position:absolute;z-index:210;width:57px;height:57px;transform:translate(-50%,-50%);border:0;border-radius:50%;background:radial-gradient(ellipse,#fff0c6ff 0%,#ffe3a8aa 30%,#ffd18030 52%,transparent 74%);box-shadow:none;cursor:pointer;animation:lampRingPulse 2.6s ease-in-out infinite}
+.entrance-lamp-ring:after{content:'';position:absolute;inset:-12px;border-radius:50%}
+.entrance-lamp-ring[hidden]{display:none}
+@keyframes lampRingPulse{0%,100%{opacity:.55}50%{opacity:1}}
+.prototype-shell .room-help,.entrance-hint{font-family:RoomHintHand,KaiTi,STKaiti,cursive;font-size:clamp(18px,2.4vw,22px);border:0;background:none;box-shadow:none;backdrop-filter:none;text-shadow:0 2px 5px #000}
+@media(prefers-reduced-motion:reduce){.entrance-entering .room-canvas>canvas{transition:opacity .5s}.entrance-entering .entrance-copy p{animation:none;opacity:0}}
+
+.prototype-shell.entrance-waiting .room-canvas>canvas{transform:translateY(18vh) scale(.76)}
+.prototype-shell.entrance-entering .room-canvas>canvas{animation:lampRoomArrive 3s ease-in-out both}
+@keyframes lampRoomArrive{from{transform:translateY(18vh) scale(.76)}to{transform:translateY(0) scale(1)}}
+.room-entrance{pointer-events:none}
+.entrance-copy{top:8%;font-size:clamp(16px,2vw,23px)}
+.prototype-shell.entrance-waiting .room-canvas>.entrance-lamp-ring{visibility:visible;pointer-events:auto}
+.entrance-lamp-ring{background:radial-gradient(ellipse,#ffad4266 0%,#ffb34755 27%,#ff980b22 52%,transparent 74%)}
+.entrance-entering .entrance-hint{display:none}
+
+.letter-overlay{position:fixed;inset:0;z-index:220;background:#0008;display:grid;place-items:center;cursor:pointer}
+.letter-overlay[hidden]{display:none}
+.letter-paper{width:min(76vw,500px);height:min(75vh,700px);background:#fff9eb;box-shadow:0 12px 60px #0006;transform:rotate(-2deg);border:1px solid #dfd2b9}
+
+/* Landscape entrance: copy on the left, room on the right. */
+@media (orientation:landscape){
+ .entrance-copy,.entrance-waiting .entrance-copy{left:5%;top:30%;width:40%;text-align:left;font-size:clamp(16px,2vw,23px)}
+ .entrance-copy p{margin-bottom:8px}.entrance-copy p:last-child{margin-top:20px}
+ .prototype-shell.entrance-waiting .room-canvas>canvas{transform:translateX(23vw) scale(.62)}
+ .prototype-shell.entrance-entering .room-canvas>canvas{animation:landscapeRoomArrive 3s ease-in-out both}
+ .entrance-hint{left:50%;width:45%;bottom:10%}
+}
+@keyframes landscapeRoomArrive{from{transform:translateX(23vw) scale(.62)}to{transform:translateX(0) scale(1)}}
+.rotate-phone{display:none}
+@media(pointer:coarse) and (orientation:portrait){
+ .rotate-phone{position:fixed;inset:0;z-index:1000;background:#080907;color:#eee9dc;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;font:22px RoomHintHand,KaiTi,cursive;text-align:center}
+ .rotate-phone button{background:none;color:inherit;border:1px solid #e8d8b555;border-radius:12px;padding:12px 24px;font:inherit}
+ .rotate-phone span{font-size:48px}
+}
+.birthday-mail{position:fixed;inset:0;z-index:300;background:#0006;display:grid;place-items:center;overflow:hidden}.birthday-mail[hidden]{display:none}.mail-stage{width:min(84vw,720px);height:min(81dvh,610px);position:relative;pointer-events:none}.mail-stage>*{position:absolute;left:50%;top:50%;translate:-50% -50%}.mail-back,.mail-pocket,.mail-flap{width:47%;aspect-ratio:23/15;background:#eee2cb}.mail-pocket{background:linear-gradient(36deg,transparent 49.4%,#a18b70 50%,transparent 50.6%),linear-gradient(-36deg,transparent 49.4%,#a18b70 50%,transparent 50.6%),#eee2cb;clip-path:polygon(0 0,50% 55%,100% 0,100% 100%,0 100%)}.mail-flap{transform-origin:center top;background:#dfccac;clip-path:polygon(0 0,100% 0,50% 57%)}.mail-page{box-sizing:border-box;width:100%;height:100%;margin:0;background:#fffefa;color:#453e36;padding:clamp(15px,3vh,30px) 6%;overflow:auto;pointer-events:auto;box-shadow:0 4px 24px #0004;font:clamp(15px,2.45vh,20px)/1.65 RoomHintHand,KaiTi,serif}.mail-lines{min-height:100%;background:repeating-linear-gradient(to bottom,transparent 0 calc(1.65em - 1px),#c9d2d6 calc(1.65em - 1px) 1.65em)}.mail-lines p{margin:0;text-indent:2em}
+.mail-stage{width:min(66vw,490px);isolation:isolate}.mail-back{z-index:0}.mail-page{z-index:2;font-family:IdeasBookHand,KaiTi,cursive}.mail-pocket{z-index:3}.mail-flap{z-index:4}.mail-pocket:after{content:'';position:absolute;right:9%;bottom:11%;width:9%;aspect-ratio:1;background:#c09072;border:2px dotted #eee2cb;transform:rotate(-7deg)}
+
+.mail-lines{display:flex;flex-direction:column}.mail-lines .mail-signature{margin-top:auto;padding-top:1.65em;text-align:right;text-indent:0}
+
+@keyframes roomControlsAppear{from{opacity:0}to{opacity:1}}
+.entrance-done>.room-help,
+.entrance-done>.compact-toolbar,
+.entrance-done>.sofa-switch,
+.entrance-done .room-canvas>.frame-editor{animation:roomControlsAppear 1.2s ease-out both}
