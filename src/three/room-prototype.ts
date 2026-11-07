@@ -602,7 +602,7 @@ export function createRoomPrototype(host:HTMLElement, callbacks:{onReady:()=>voi
   if(root?.userData.item)focusItem(root.userData.item.label);else if(focused)resetView();
  };
  renderer.domElement.addEventListener('pointerdown',down);renderer.domElement.addEventListener('pointermove',motion);renderer.domElement.addEventListener('pointerup',up);const keydown=(e:KeyboardEvent)=>{if(e.key==='Escape')resetView()};window.addEventListener('keydown',keydown);
- const resize=()=>{const w=host.clientWidth,h=host.clientHeight;renderer.setSize(w,h);camera.aspect=w/h;camera.fov=w/h<1?50:35;camera.updateProjectionMatrix();const shortLandscape=w>h&&h<=520;home.set(.35,shortLandscape?5.7:3.8,w/h<1?13:shortLandscape?8.8:9.4);if(!focused){camera.position.copy(home);controls.target.copy(target)}};const observer=new ResizeObserver(resize);observer.observe(host);resize();
+ const resize=()=>{const w=host.clientWidth,h=host.clientHeight;renderer.setSize(w,h);camera.aspect=w/h;camera.fov=w/h<1?50:35;camera.updateProjectionMatrix();const shortLandscape=w>h&&h<=520;home.set(.35,shortLandscape?5.05:3.8,w/h<1?13:shortLandscape?7.6:9.4);if(!focused){camera.position.copy(home);controls.target.copy(target)}};const observer=new ResizeObserver(resize);observer.observe(host);resize();
  const disposeMemoryProps=createMemoryProps(room);
  const disposeIdeasBook=setupIdeasBook(room,host);
  const disposeProps=()=>{disposeIdeasBook();disposeMemoryProps()};
