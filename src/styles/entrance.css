@@ -87,3 +87,8 @@
 .entrance-done>.compact-toolbar,
 .entrance-done>.sofa-switch,
 .entrance-done .room-canvas>.frame-editor{animation:roomControlsAppear 1.2s ease-out both}
+
+/* A landscape phone can be shorter than the desktop room's minimum height. */
+@media (orientation:landscape) and (max-height:520px){
+ .prototype-shell{min-height:0}
+}
